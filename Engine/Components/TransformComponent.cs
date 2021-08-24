@@ -4,9 +4,9 @@ namespace Engine
 {
     class TransformComponent : Component
     {
-        Vector2 Position;
-        float Rotation;
-        Vector2 Scale;
+        public Vector2 Position;
+        public float Rotation;
+        public Vector2 Scale;
 
         public TransformComponent()
         {

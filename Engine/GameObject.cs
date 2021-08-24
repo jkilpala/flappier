@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Engine
 {
@@ -17,7 +18,28 @@ namespace Engine
 
         public void AddComponent(Component component)
         {
+            component.SetParent(this);
             componentsInGameObject.Add(component);
+        }
+
+        public T GetComponent<T>() where T : Component
+        {
+            return (T)componentsInGameObject.Find(c => c.GetType() == typeof(T));
+        }
+
+        public void Update(float deltaTime)
+        {
+            for(int i = 0; i < componentsInGameObject.Count; i++)
+            {
+                componentsInGameObject[i].Update(deltaTime);
+            }
+        }
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            for(int i = 0; i < componentsInGameObject.Count; i++)
+            {
+                componentsInGameObject[i].Draw(spriteBatch);
+            }
         }
 
 

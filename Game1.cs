@@ -9,6 +9,7 @@ namespace flappy
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+        GameObject go;
 
         public Game1()
         {
@@ -20,8 +21,11 @@ namespace flappy
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            GameObject go = new GameObject();
-            GameObject go2 = new GameObject();
+            go = new GameObject();
+            var nameC = go.GetComponent<NameComponent>();
+            var transformC = go.GetComponent<TransformComponent>();             
+            
+            //GameObject go2 = new GameObject();
 
             base.Initialize();
         }
@@ -29,6 +33,8 @@ namespace flappy
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            go.AddComponent(new SpriteComponent(Content.Load<Texture2D>("Ship")));
 
             // TODO: use this.Content to load your game content here
         }
@@ -47,6 +53,9 @@ namespace flappy
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
+            _spriteBatch.Begin();
+            go.Draw(_spriteBatch);
+            _spriteBatch.End();
             // TODO: Add your drawing code here
 
             base.Draw(gameTime);
