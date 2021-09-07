@@ -35,6 +35,7 @@ namespace flappy
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             go.AddComponent(new SpriteComponent(Content.Load<Texture2D>("Ship")));
+            go.AddComponent(new RigidBody2D());
 
             // TODO: use this.Content to load your game content here
         }
@@ -43,8 +44,29 @@ namespace flappy
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-
+            
+            PhysicsEngine.Instance.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
             // TODO: Add your update logic here
+
+            if(Keyboard.GetState().IsKeyDown(Keys.S))
+            {
+                go.GetComponent<RigidBody2D>().AddForce(ForceType.Impulse, new Vector2(0.0f,2.0f));
+            }
+
+            if(Keyboard.GetState().IsKeyDown(Keys.D))
+            {
+                go.GetComponent<RigidBody2D>().AddForce(ForceType.Impulse, new Vector2(2.0f,0.0f));
+            }
+            
+            if(Keyboard.GetState().IsKeyDown(Keys.W))
+            {
+                go.GetComponent<RigidBody2D>().AddForce(ForceType.Impulse, new Vector2(0.0f,-1.0f));
+            }
+
+            if(Keyboard.GetState().IsKeyDown(Keys.A))
+            {
+                go.GetComponent<RigidBody2D>().AddForce(ForceType.Impulse, new Vector2(-1.0f,0.0f));
+            }
 
             base.Update(gameTime);
         }
