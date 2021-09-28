@@ -36,6 +36,7 @@ namespace flappy
 
             go.AddComponent(new SpriteComponent(Content.Load<Texture2D>("Ship")));
             go.AddComponent(new RigidBody2D());
+            go.AddComponent(new BoxColliderComponent(go, GraphicsDevice));
 
             // TODO: use this.Content to load your game content here
         }
@@ -68,6 +69,7 @@ namespace flappy
                 go.GetComponent<RigidBody2D>().AddForce(ForceType.Impulse, new Vector2(-1.0f,0.0f));
             }
 
+            go.Update((float)gameTime.TotalGameTime.TotalSeconds);
             base.Update(gameTime);
         }
 
