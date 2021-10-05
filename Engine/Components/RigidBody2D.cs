@@ -6,23 +6,27 @@ namespace Engine
     class RigidBody2D : Component
     {
         Vector2 velocity;
+        Vector2 acceleration;
         float friction;
         float mass;
         TransformComponent MyTransform;
+        PhysicsEngine physicsEngine;
+        bool affectedWithGravity = true;
+
         
         public RigidBody2D()
         {
             velocity = Vector2.Zero;
             mass = 1.0f;
             friction = 0.9f;
-            PhysicsEngine.Instance.RegisterToPhysics(this);
+            physicsEngine = PhysicsEngine.Instance.RegisterToPhysics(this);
         }
 
         public void AddForce(ForceType forceType, Vector2 direction)
         {
             if(forceType == ForceType.Impulse)
             {
-                velocity += direction;
+                acceleration += direction;
             }
         }
 
@@ -31,7 +35,14 @@ namespace Engine
             if(MyTransform == null)
                 MyTransform = Parent.GetComponent<TransformComponent>();
 
-            velocity *= friction;
+            if(affectedWithGravity)
+            {
+                acceleration += physicsEngine.GetGravity() * deltaTime;
+            }
+
+            acceleration *= (1.0f-friction);
+            velocity += acceleration;
+            //velocity *= friction;
             MyTransform.Position += velocity;
         }
 

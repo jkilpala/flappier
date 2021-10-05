@@ -10,6 +10,7 @@ namespace flappy
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         GameObject go;
+        GameObject go2;
 
         public Game1()
         {
@@ -26,6 +27,11 @@ namespace flappy
             var transformC = go.GetComponent<TransformComponent>();             
             
             //GameObject go2 = new GameObject();
+            go2 = new GameObject();
+
+            go2.GetComponent<TransformComponent>().Position = new Vector2(0, 100);
+
+            go2.AddComponent(new BoxColliderComponent(go2, GraphicsDevice));
 
             base.Initialize();
         }
@@ -70,6 +76,8 @@ namespace flappy
             }
 
             go.Update((float)gameTime.TotalGameTime.TotalSeconds);
+            go2.Update((float)gameTime.TotalGameTime.TotalSeconds);
+            
             base.Update(gameTime);
         }
 
@@ -79,6 +87,7 @@ namespace flappy
 
             _spriteBatch.Begin();
             go.Draw(_spriteBatch);
+            go2.Draw(_spriteBatch);
             _spriteBatch.End();
             // TODO: Add your drawing code here
 

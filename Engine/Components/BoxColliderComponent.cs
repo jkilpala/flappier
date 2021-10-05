@@ -17,12 +17,17 @@ namespace Engine
             myTransform = Parent.GetComponent<TransformComponent>();
             boundingBox = new Rectangle((int)myTransform.Position.X, (int)myTransform.Position.Y, 100, 100);
             AddVectorsForRectangle(boundingBox);
+            PhysicsEngine.Instance.RegisterCollider(this);
+        }
+        public Rectangle GetCollider()
+        {
+            return boundingBox;
         }
         public override void Update(float deltaTime)
-        {
-            
+        {            
             base.Update(deltaTime);
-            UpdatePosition(myTransform.Position);
+            boundingBox.Location = new Point((int)(myTransform.Position.X + position.X), (int)(myTransform.Position.Y + position.Y));
+            UpdateGraphicsPosition(myTransform.Position);
         }
 
         public override void Draw(SpriteBatch spriteBatch)

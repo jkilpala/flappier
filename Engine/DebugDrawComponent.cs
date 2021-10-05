@@ -29,18 +29,24 @@ namespace Engine
             vectors = new List<Vector2>();
         }
 
-        public void UpdatePosition(Vector2 pos)
+        public void UpdateGraphicsPosition(Vector2 pos)
         {
             position = pos;
         }
 
         protected void AddVectorsForRectangle(Rectangle rect)
         {
-            vectors.Add(new Vector2(rect.X,rect.Y));
-            vectors.Add(new Vector2(rect.X + rect.Width,rect.Y));
-            vectors.Add(new Vector2(rect.X + rect.Width,rect.Y + rect.Height));
-            vectors.Add(new Vector2(rect.X, rect.Y + rect.Height));
-            vectors.Add(new Vector2(rect.X,rect.Y));
+            // vectors.Add(new Vector2(rect.X,rect.Y));
+            // vectors.Add(new Vector2(rect.X + rect.Width,rect.Y));
+            // vectors.Add(new Vector2(rect.X + rect.Width,rect.Y + rect.Height));
+            // vectors.Add(new Vector2(rect.X, rect.Y + rect.Height));
+            // vectors.Add(new Vector2(rect.X,rect.Y));
+
+            vectors.Add(new Vector2(0,0));
+            vectors.Add(new Vector2(rect.Width,0));
+            vectors.Add(new Vector2(rect.Width,rect.Height));
+            vectors.Add(new Vector2(0, rect.Height));
+            vectors.Add(new Vector2(0,0));
 
         }
         public override void Update(float deltaTime)
