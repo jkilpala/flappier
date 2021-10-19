@@ -43,7 +43,15 @@ namespace flappy
             go.AddComponent(new SpriteComponent(Content.Load<Texture2D>("Ship")));
             go.AddComponent(new RigidBody2D());
             go.AddComponent(new BoxColliderComponent(go, GraphicsDevice));
+            go.AddComponent(new TextComponent(go, Content.Load<SpriteFont>("TestFont"),"Muumi", Color.Black));
 
+            go.AddComponent(new TestBehavior());
+
+            go2.AddComponent(new TextComponent(go2, Content.Load<SpriteFont>("TestFont"),"Kukka", Color.Red));
+
+
+            go.OnStart();
+            go2.OnStart();
             // TODO: use this.Content to load your game content here
         }
 

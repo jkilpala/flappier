@@ -27,6 +27,13 @@ namespace Engine
             return (T)componentsInGameObject.Find(c => c.GetType() == typeof(T));
         }
 
+        public void OnStart()
+        {
+            for(int i = 0; i < componentsInGameObject.Count; i++)
+            {
+                componentsInGameObject[i].OnStart();
+            }
+        }
         public void Update(float deltaTime)
         {
             for(int i = 0; i < componentsInGameObject.Count; i++)

@@ -18,6 +18,11 @@ namespace Engine
             Parent = gameObject;
         }
         
+        public virtual void OnStart()
+        {
+            
+        }
+
         public virtual void Update(float deltaTime)
         {
 
