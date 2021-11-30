@@ -18,7 +18,7 @@ namespace Engine
         {
             velocity = Vector2.Zero;
             mass = 1.0f;
-            friction = 0.9f;
+            friction = 0.6f;
             physicsEngine = PhysicsEngine.Instance.RegisterToPhysics(this);
         }
 

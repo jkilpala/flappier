@@ -16,10 +16,12 @@ namespace Engine
             //qwe = new List<NameComponent>();
         }
 
-        public void AddComponent(Component component)
+        public Component AddComponent(Component component)
         {
             component.SetParent(this);
             componentsInGameObject.Add(component);
+
+            return component;
         }
 
         public T GetComponent<T>() where T : Component
