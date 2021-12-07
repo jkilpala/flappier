@@ -16,6 +16,9 @@ namespace flappy
         GameObject backgroundTop2;
 
         GameObject flappy;
+
+        //GameObject tube;
+        GameObject tubeManager;
         
 
 
@@ -71,10 +74,21 @@ namespace flappy
             var spriteCompnent = (SpriteComponent)flappy.AddComponent(new SpriteComponent(Content.Load<Texture2D>("Ship")));
             spriteCompnent.Anchor = new Vector2(0.5f,0.5f);
             flappy.GetComponent<TransformComponent>().Position = new Vector2(256,256);
-            flappy.AddComponent(new BoxColliderComponent(flappy, _graphics.GraphicsDevice));
+            var boxCollider = (BoxColliderComponent)flappy.AddComponent(new BoxColliderComponent(flappy, _graphics.GraphicsDevice));
+            boxCollider.SetSize(new Point(64,64));
+            boxCollider.SetAnchor(new Vector2(0.5f,0.5f));
+            var spriteSwapper = (SpriteSwapperBehavior)flappy.AddComponent(new SpriteSwapperBehavior());            
+            spriteSwapper.SetImages(Content.Load<Texture2D>("Ship02"), Content.Load<Texture2D>("Ship"));
             flappy.AddComponent(new RigidBody2D());
+            flappy.AddComponent(new RotatorBehavior());
             //Behavior
             flappy.OnStart();
+
+            
+
+            tubeManager = new GameObject();
+            tubeManager.AddComponent(new TubeManagerBehavior(Content.Load<Texture2D>("tube"), _graphics.GraphicsDevice));
+
 
             //go.GetComponent<TransformComponent>().Position = new Vector2(50,50);
             //go.AddComponent(new SpriteComponent(Content.Load<Texture2D>("Ship")));
@@ -116,6 +130,7 @@ namespace flappy
             if(Keyboard.GetState().IsKeyDown(Keys.W) && !wBlocker)
             {
                 flappy.GetComponent<RigidBody2D>().AddForce(ForceType.Impulse, new Vector2(0.0f,-10.0f));
+                flappy.GetComponent<SpriteSwapperBehavior>().SwapImages();
                 wBlocker = true;
             }
             else if(Keyboard.GetState().IsKeyUp(Keys.W))
@@ -133,7 +148,7 @@ namespace flappy
             backgroundTop.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
             backgroundTop2.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
             flappy.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
-
+            tubeManager.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
             base.Update(gameTime);
         }
 
@@ -148,6 +163,7 @@ namespace flappy
             flappy.Draw(_spriteBatch);
             //go.Draw(_spriteBatch);
             //go2.Draw(_spriteBatch);
+            tubeManager.Draw(_spriteBatch);
             _spriteBatch.End();
             // TODO: Add your drawing code here
 

@@ -19,7 +19,7 @@ namespace Engine
             //Create pixel texture
             pixel = new Texture2D(device,1,1,false,SurfaceFormat.Color);
             Color[] pixels = new Color[1];
-            pixels[0] = Color.Yellow;
+            pixels[0] = Color.Magenta;
             pixel.SetData<Color>(pixels);
 
             color = Color.White;
@@ -41,7 +41,7 @@ namespace Engine
             // vectors.Add(new Vector2(rect.X + rect.Width,rect.Y + rect.Height));
             // vectors.Add(new Vector2(rect.X, rect.Y + rect.Height));
             // vectors.Add(new Vector2(rect.X,rect.Y));
-
+            vectors.Clear();
             vectors.Add(new Vector2(0,0));
             vectors.Add(new Vector2(rect.Width,0));
             vectors.Add(new Vector2(rect.Width,rect.Height));

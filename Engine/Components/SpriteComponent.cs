@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using System;
 
 namespace Engine
 {
@@ -26,6 +27,11 @@ namespace Engine
             DrawOrder = 0;
             Anchor = new Vector2(0.0f, 0.0f);
             Offset = new Vector2(0.0f, 0.0f);
+        }
+
+        internal void SetImage(Texture2D image)
+        {
+            SpriteImage = image;
         }
 
         public override void Draw(SpriteBatch spriteBatch)

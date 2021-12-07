@@ -1,3 +1,4 @@
+using System;
 using Microsoft.Xna.Framework;
 
 namespace Engine
@@ -20,6 +21,11 @@ namespace Engine
             mass = 1.0f;
             friction = 0.6f;
             physicsEngine = PhysicsEngine.Instance.RegisterToPhysics(this);
+        }
+
+        internal Vector2 GetVelocity()
+        {
+            return velocity;
         }
 
         public void AddForce(ForceType forceType, Vector2 direction)
