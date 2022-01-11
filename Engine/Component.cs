@@ -31,5 +31,10 @@ namespace Engine
         {
             
         }
+
+        public virtual void OnCollision(BoxColliderComponent otherComponent)
+        {
+            
+        }
     }
 }

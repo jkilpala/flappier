@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -51,6 +52,12 @@ namespace Engine
             }
         }
 
-
+        internal void ReportCollision(BoxColliderComponent otherComponent)
+        {
+            foreach(var component in componentsInGameObject)
+            {
+                component.OnCollision(otherComponent);
+            }
+        }
     }
 }

@@ -64,6 +64,11 @@ namespace Engine
             AddVectorsForRectangle(boundingBox);
         }
 
+        internal void ReportCollision(BoxColliderComponent otherComponent)
+        {
+            Parent.ReportCollision(otherComponent);
+        }
+
         internal void SetAnchor(Vector2 anchor)
         {
             Anchor = anchor;

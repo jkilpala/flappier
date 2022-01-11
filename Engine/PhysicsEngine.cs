@@ -57,6 +57,7 @@ namespace Engine
                         if(collision)
                         {
                             System.Diagnostics.Debug.WriteLine("Törmäys");
+                            boxColliders[i].ReportCollision(boxColliders[n]);
                         }
                     }
                 }

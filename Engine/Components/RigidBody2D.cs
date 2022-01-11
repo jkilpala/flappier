@@ -52,5 +52,9 @@ namespace Engine
             MyTransform.Position += velocity;
         }
 
+        internal void StopVelocity()
+        {
+            velocity = Vector2.Zero;
+        }
     }
 }

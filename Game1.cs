@@ -81,14 +81,17 @@ namespace flappy
             spriteSwapper.SetImages(Content.Load<Texture2D>("Ship02"), Content.Load<Texture2D>("Ship"));
             flappy.AddComponent(new RigidBody2D());
             flappy.AddComponent(new RotatorBehavior());
+
+            var controller =  (FlappyControllerBehavior)flappy.AddComponent(new FlappyControllerBehavior());
             //Behavior
             flappy.OnStart();
 
             
 
             tubeManager = new GameObject();
-            tubeManager.AddComponent(new TubeManagerBehavior(Content.Load<Texture2D>("tube"), _graphics.GraphicsDevice));
+            var manager =  (TubeManagerBehavior)tubeManager.AddComponent(new TubeManagerBehavior(Content.Load<Texture2D>("tube"), _graphics.GraphicsDevice));
 
+            controller.SetTubeManager(manager);
 
             //go.GetComponent<TransformComponent>().Position = new Vector2(50,50);
             //go.AddComponent(new SpriteComponent(Content.Load<Texture2D>("Ship")));
@@ -129,8 +132,8 @@ namespace flappy
             
             if(Keyboard.GetState().IsKeyDown(Keys.W) && !wBlocker)
             {
-                flappy.GetComponent<RigidBody2D>().AddForce(ForceType.Impulse, new Vector2(0.0f,-10.0f));
-                flappy.GetComponent<SpriteSwapperBehavior>().SwapImages();
+                //flappy.GetComponent<RigidBody2D>().AddForce(ForceType.Impulse, new Vector2(0.0f,-10.0f));
+                //flappy.GetComponent<SpriteSwapperBehavior>().SwapImages();
                 wBlocker = true;
             }
             else if(Keyboard.GetState().IsKeyUp(Keys.W))

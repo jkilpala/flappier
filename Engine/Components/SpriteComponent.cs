@@ -39,6 +39,31 @@ namespace Engine
             if(MyTransform == null)
                 MyTransform = Parent.GetComponent<TransformComponent>();
 
+
+            SpriteEffects spriteEffects = SpriteEffects.None;
+            Vector2 fixedScale = MyTransform.Scale;
+
+            
+            if(MyTransform.Scale.X < 0 && MyTransform.Scale.Y < 0)
+            {
+                spriteEffects = SpriteEffects.FlipHorizontally | SpriteEffects.FlipVertically;
+                fixedScale.X *= -1;
+                fixedScale.Y *= -1;
+            }
+            else if(MyTransform.Scale.X < 0)
+            {
+                spriteEffects = SpriteEffects.FlipHorizontally;
+                fixedScale.X *= -1;
+            }
+            else if(MyTransform.Scale.Y < 0)
+            {
+                spriteEffects = SpriteEffects.FlipVertically;
+                fixedScale.Y *= -1;
+
+            }
+
+
+
             spriteBatch.Draw(
                 SpriteImage, 
                 GetOffsettedPosition(),
@@ -46,8 +71,8 @@ namespace Engine
                 DrawColor, 
                 MyTransform.Rotation, 
                 GetAnchorPoint(), 
-                MyTransform.Scale, 
-                SpriteEffects.None, 
+                fixedScale, 
+                spriteEffects, 
                 DrawOrder);
 
             base.Draw(spriteBatch);
