@@ -31,6 +31,18 @@ namespace flappy{
             tubesToDestroy = new List<GameObject>();
             random = new Random();
         }
+        public GameObject GenerateTrigger()
+        {
+            var trigger = new GameObject();
+            trigger.GetComponent<NameComponent>().SetName("trigger");
+            var transform = trigger.GetComponent<TransformComponent>();
+            transform.Position = new Vector2(600, 222 + (lastRandom * tubeStep));
+            var boxCollider = (BoxColliderComponent)trigger.AddComponent(new BoxColliderComponent(trigger, device));
+            boxCollider.SetSize(new Point(50,50));            
+            trigger.AddComponent(new MoveTubeBehavior());
+            trigger.OnStart();
+            return trigger;
+        }
         public GameObject GenerateTube(bool up)
         {
             var tube = new GameObject();
@@ -71,7 +83,11 @@ namespace flappy{
             timer += deltaTime;
             if(timer >= spawnTime)
             {
+                //Upper tube
                 tubes.Add(GenerateTube(true));
+                //Score trigger
+                tubes.Add(GenerateTrigger());
+                //Lower tube
                 tubes.Add(GenerateTube(false));
                 timer -= spawnTime;
             }
